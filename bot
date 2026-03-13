@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Gửi tin nhắn Discord</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; margin-top: 50px; }
+        textarea { width: 300px; height: 100px; margin-bottom: 10px; }
+        button { padding: 10px 20px; cursor: pointer; background: #5865F2; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Gửi tin nhắn đến Discord</h2>
+    <textarea id="message" placeholder="Nhập tin nhắn tại đây..."></textarea>
+    <button onclick="sendMessage()">Gửi tin nhắn</button>
+
+    <script>
+        function sendMessage() {
+            const webhookUrl = "DÁN_URL_WEBHOOK_CỦA_BẠN_VÀO_ĐÂY"; // Thay bằng URL của bạn
+            const message = document.getElementById('message').value;
+
+            if (!message) return alert("Vui lòng nhập tin nhắn!");
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: message })
+            })
+            .then(() => {
+                alert("Đã gửi thành công!");
+                document.getElementById('message').value = "";
+            })
+            .catch(err => console.error('Lỗi:', err));
+        }
+    </script>
+</body>
+</html>
